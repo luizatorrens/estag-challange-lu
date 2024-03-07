@@ -152,7 +152,7 @@ const finishBuy = async () => {
         updateTable();
       } catch (error) {
         console.error(error);
-        alert("merda");
+        alert("ocorreu um erro");
       }
     }
   }
