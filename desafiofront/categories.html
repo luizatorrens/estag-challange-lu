@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>Categories</title>
+</head>
+
+<body>
+  <div class="navs">
+    <h1>Suite Store</h1>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="products.html">Product</a></li>
+      <li><a href="categories.html">Categories</a></li>
+      <li><a href="history.html">History</a></li>
+    </ul>
+  </div>
+  <div class="all">
+    <form id="categorytax" class="col-6">
+      <h3 style="text-align: center;">Categories</h3>
+      <div class="input" style=" width: 90%;">
+        <input
+          style="margin-bottom: 20px; display:block; width:100%;margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; "
+          class="campCategory" type="text" name="name" id="categoryname" placeholder="Category Name" required
+          pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" />
+      </div>
+
+      <div class="input" style=" width: 90%;">
+        <input class="campCategory" type="number" onkeypress="return event.charCode >= 48" min="1" name="tax" id="tax"
+          placeholder="Tax" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
+          style="margin-bottom: 20px; width: 90%; display:block; width:100%;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; " />
+      </div>
+
+      <div class="button" style=" text-align: center; width: 90%;">
+        <input onclick="createCategory()" type="submit" style="width: 100%;" id="save" class="oi"></input>
+      </div>
+    </form>
+    <div id="linha-vertical"></div>
+    <div class="col-6" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="table" style="margin-bottom: 20px; width: 90%; text-align: center;">
+        <table id="tableCategory" style="width: 100%;">
+          <thead>
+            <th>Code</th>
+            <th>Category</th>
+            <th>Tax %</th>
+          </thead>
+
+          <tbody id="tbody">
+
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="js/categories.js"></script>
+
+</html>

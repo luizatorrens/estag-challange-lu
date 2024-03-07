@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Suite Store</title>
+</head>
+
+<body>
+  <div class="navs">
+    <h1>Suite Store</h1>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="products.html">Product</a></li>
+      <li><a href="categories.html">Categories</a></li>
+      <li><a href="history.html">History</a></li>
+    </ul>
+  </div>
+
+  <div class="all">
+    <div class="col-6">
+      <form id="form" class="col-6" style="margin-bottom: 20px; width: 100%; text-align: center;">
+        <div class="select">
+          <select name="product" id="selectProducts"
+            style="width: 100%; display:block;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color;  ">>
+          </select>
+        </div>
+          <div class="group-input-left">
+            <input type="number" onkeypress="return event.charCode >= 48" min="1" name="amount" id="amount"
+              placeholder="Amount" class="campBuy" required
+              style="width: 30%; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; " />
+            <input type="text" name="tax" id="tax" placeholder="Tax" class="campBuy" readonly disabled
+              style="width: 30%; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; " />
+            <input type="text" name="price" id="price" placeholder="Price" class="campBuy" readonly disabled
+              style="width: 30%; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; " />
+          </div>
+      </form>
+      <div class="button-add" style="width: 90%; text-align: center;">
+        <input class="oi" type="submit" style="width: 100%;"></input>
+      </div>
+
+    </div>
+    <div id="linha-vertical"></div>
+    <div class="col-6" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="table" style="margin-bottom: 20px; width: 90%; text-align: center;">
+        <table id="tableHome" style="width: 100%;">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Amount</th>
+              <th>Price</th>
+              <th>Tax</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ttax " style="position:relative; ">
+        <div class="input-ttax">
+          <input type="text" name="tax" id="totaltax" placeholder="Tax" readonly disabled class="calcTax"
+            style=" width: 100%; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; " />
+        </div>
+
+        <div class=" input-ttax" style="margin-bottom: 20px;">
+          <input type="text" name="total" id="totalprice" placeholder="Total" readonly disabled
+            style=" width: 100%; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; " />
+        </div>
+
+        <div class=" button-ttax " style=" display: flex;">
+          <button id="cancel" class="oi" style="width: 50%; margin-right: 1%;">Cancel</button>
+          <button id="finish" class="oi" style="width: 50%;">Finish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="js/home.js"></script>
+
+</html>

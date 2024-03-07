@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>Products</title>
+</head>
+
+<body>
+  <div class="navs">
+    <h1>Suite Store</h1>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="products.html">Product</a></li>
+      <li><a href="categories.html">Categories</a></li>
+      <li><a href="history.html">History</a></li>
+    </ul>
+  </div>
+  <div class="all">
+
+
+
+    <form id="form" class="col-6" style=" text-align: center;">
+      <div class="select">
+        <select name="category" id="selectCategories"
+          style="width: 100%; display:block;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color;  ">
+        </select>
+      </div>
+      <div class="group-input-left">
+        <input class="campProduct" type="text" name="name" id="name" placeholder="Product Name" required
+          pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
+          style="width: 32%; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color; " />
+        <input class="campProduct" type="number" onkeypress="return event.charCode >= 48" min="1" name="amount"
+          id="amount" placeholder="Amount" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
+          style="width: 32%; margin-left: 5px; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color;" />
+        <input class="campProduct" type="number" onkeypress="return event.charCode >= 48" min="1" name="price"
+          id="price" placeholder="Price" required pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
+          style="width: 32%; margin-left: 5px; margin:10px 0;padding:10px; border-radius:10px;border: 1px solid #eee;transition: .3s border-color;" />
+      </div>
+
+      <div class="button" style=" text-align: center; width: 90%; ">
+        <input onclick="createProduct()" id="save" type="submit" style=" width: 100%;" class="oi"></input>
+      </div>
+    </form>
+
+    <div id="linha-vertical"></div>
+    <div class="col-6" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="table" style="margin-bottom: 20px; width: 90%; text-align: center;">
+        <table id="tableProduct" style="width: 100%;">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Product</th>
+              <th>Amount</th>
+              <th>Unit Price</th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="js/products.js"></script>
+
+
+</html>
