@@ -11,6 +11,7 @@ export default function Home() {
     price: "",
     tax: "",
   });
+  const [carrinhoTemp, setCarrinhoTemp] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost/routes/products.php")
@@ -42,20 +43,46 @@ export default function Home() {
       });
     }
   };
-  const addProduct = (e) => {
-    e.preventDefault();
-    let data = new FormData();
-    data.append("name", name);
-    data.append("amount", amount);
-    data.append("price", price);
-    data.append("category", category);
-    fetch("http://localhost/routes/products.php", {
-      method: "POST",
-      body: data,
-    }).then(getProducts());
-    window.location.reload()
-  };
 
+  const saveBuy = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost/routes/products.php");
+    const dbProduct = await response.json();
+    const product = dbProduct.find((p) => String(p.code) === selectedProduct);
+
+    const amount = parseFloat(document.getElementById("amount").value);
+    const tax_value = product.tax_value;
+    const price = product.price;
+
+    const totalTax = (tax_value * price * amount) / 100;
+    const totalPrice = price * amount;
+    const total = totalTax + totalPrice;
+
+    const productExistent = carrinhoTemp.some(
+      (produto) => produto.code === product.code
+    );
+    if (!productExistent) {
+      if (amount <= product.amount) {
+        const buy = {
+          code: product.code,
+          name: product.name,
+          price: totalPrice,
+          tax: totalTax,
+          amount: amount,
+          total: total,
+        };
+
+        setCarrinhoTemp([...carrinhoTemp, buy]);
+      } else {
+        alert(
+          `Sem estoque suficiente para essa quantidade! Digite um valor menor que ${product.amount}!`
+        );
+      }
+    } else {
+      alert("Este produto foi adicionado ao carrinho anteriormente.");
+    }
+    console.log(carrinhoTemp);
+  };
 
   return (
     <>
@@ -64,7 +91,7 @@ export default function Home() {
         <h2 className="text-center">Add to cart</h2>
         <div className="container row">
           <div className="col-6">
-            <form className="mt-5">
+            <form onSubmit={saveBuy} className="mt-5 ">
               <select
                 id="selectProducts"
                 onChange={changeProduct}
@@ -103,7 +130,9 @@ export default function Home() {
                 id="price"
                 value={productData.price}
               ></input>
-              <button className="button mt-2 mb-2">Add to cart</button>
+              <button type="submit" className="button mt-2 mb-2">
+                Add to cart
+              </button>
             </form>
           </div>
 
@@ -119,12 +148,14 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Blusa</td>
-                  <td>2</td>
-                  <td>140</td>
-                  <td>24</td>
-                  <td>164</td>
+                {carrinhoTemp.map((item, index) => (
+
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.price}</td>
+                  <td>{item.tax}</td>
+                  <td>{item.total}</td>
                   <td>
                     <button className="buttonDel">
                       <svg viewBox="0 0 448 512" className="svgIcon">
@@ -133,34 +164,8 @@ export default function Home() {
                     </button>
                   </td>
                 </tr>
-                <tr>
-                  <td>Calça</td>
-                  <td>1</td>
-                  <td>220</td>
-                  <td>30</td>
-                  <td>250</td>
-                  <td>
-                    <button className="buttonDel">
-                      <svg viewBox="0 0 448 512" className="svgIcon">
-                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Melancia</td>
-                  <td>1</td>
-                  <td>10</td>
-                  <td>1.50</td>
-                  <td>11.50</td>
-                  <td>
-                    <button className="buttonDel">
-                      <svg viewBox="0 0 448 512" className="svgIcon">
-                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
+
+                ))}
               </tbody>
             </Table>
 
