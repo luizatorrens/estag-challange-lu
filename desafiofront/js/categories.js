@@ -31,7 +31,7 @@ const createRow = (category) => {
           <td>${category.code}</td>
           <td>${category.name}</td>
           <td>${category.tax}</td>
-          <td><button onclick="deletarCategory(${category.code})" class="oi" type="button">Delete</button> </td>
+          <td><button onclick="deletarCategory(${category.code})" class="oi"type="button">Delete</button> </td>
 `;
   document.querySelector("#tableCategory>tbody").appendChild(newRow);
 };
