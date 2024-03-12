@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [values, setValues] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState([]);
   const [productData, setProductData] = useState({
-    price: "",
-    tax: "",
-  });
+      price: "",
+      tax: "",
+    });
   const [carrinhoTemp, setCarrinhoTemp] = useState([]);
+  let sumTax = 0;
+  let sumPrice = 0;
 
   useEffect(() => {
     fetch("http://localhost/routes/products.php")
@@ -43,6 +45,18 @@ export default function Home() {
       });
     }
   };
+
+  function changeTax() {
+    carrinhoTemp.forEach((item) => {
+      sumTax += item.tax;
+    });
+  }
+
+  function changePrice() {
+    carrinhoTemp.forEach((item) => {
+      sumPrice += item.price;
+    });
+  }
 
   const saveBuy = async (e) => {
     e.preventDefault();
@@ -81,9 +95,77 @@ export default function Home() {
     } else {
       alert("Este produto foi adicionado ao carrinho anteriormente.");
     }
-    console.log(carrinhoTemp);
   };
 
+  const cancelBuy = () => {
+    const response = confirm(
+      "Deseja realmente cancelar o carrinho de compras?"
+    );
+    if (response);
+    setCarrinhoTemp([]);
+  };
+
+  const removeRow = (index) => {
+    const response = window.confirm(
+      "Deseja realmente excluir esse produto do carrinho?"
+    );
+    if (response) {
+      const updatedCarrinhoTemp = [...carrinhoTemp];
+      updatedCarrinhoTemp.splice(index, 1);
+      setCarrinhoTemp(updatedCarrinhoTemp);
+    }
+  };
+
+  const finishBuy = async () => {
+    let sumPrice = 0;
+    let sumTax = 0;
+    if (carrinhoTemp.length > 0) {
+      carrinhoTemp.forEach((product) => {
+        sumTax += parseFloat(product.tax);
+        sumPrice += parseFloat(product.price);
+      });
+      const response = confirm("Deseja finalizar sua compra?");
+      if (response) {
+        try {
+          await fetch("http://localhost/routes/orders.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+              total: sumPrice,
+              tax: sumTax,
+            }),
+          }).then(async () => {
+            const res = await fetch("http://localhost/routes/orders.php");
+            const ordersCode = await res.json();
+            const lastOrderCode = ordersCode[ordersCode.length - 1].code;
+            for (const product of carrinhoTemp) {
+              fetch("http://localhost/routes/orderItem.php", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                  order_code: lastOrderCode,
+                  product_code: product.code,
+                  amount: product.amount,
+                  tax: product.tax,
+                  price: product.price,
+                }),
+              });
+            }
+          });
+          setCarrinhoTemp([]);
+        } catch (error) {
+          console.error(error);
+          alert("ocorreu um erro");
+        }
+      }
+    }
+  };
+  changeTax();
+  changePrice();
   return (
     <>
       <Header />
@@ -149,22 +231,20 @@ export default function Home() {
               </thead>
               <tbody>
                 {carrinhoTemp.map((item, index) => (
-
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.amount}</td>
-                  <td>{item.price}</td>
-                  <td>{item.tax}</td>
-                  <td>{item.total}</td>
-                  <td>
-                    <button className="buttonDel">
-                      <svg viewBox="0 0 448 512" className="svgIcon">
-                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-
+                  <tr key={index}>
+                    <td>{item.name}</td>
+                    <td>{item.amount}</td>
+                    <td>{item.price}</td>
+                    <td>{item.tax}</td>
+                    <td>{item.total}</td>
+                    <td>
+                      <button className="buttonDel" onClick={() => removeRow()}>
+                        <svg viewBox="0 0 448 512" className="svgIcon">
+                          <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </Table>
@@ -173,7 +253,8 @@ export default function Home() {
               <input
                 type="text"
                 name=""
-                id=""
+                value={sumTax}
+                id="totaltax"
                 className="form-control mb-3"
                 placeholder="Total Tax"
                 disabled
@@ -182,17 +263,26 @@ export default function Home() {
               <input
                 type="text"
                 name=""
-                id=""
+                value={sumPrice}
+                id="totalprice"
                 className="form-control mb-3"
                 placeholder="Total"
                 disabled
                 readOnly
               />
               <div className="d-flex ">
-                <button type="button" className=" button d-grid me-1">
+                <button
+                  type="button"
+                  className=" button d-grid me-1"
+                  onClick={() => cancelBuy()}
+                >
                   Cancel
                 </button>
-                <button type="button" className=" button d-grid  ">
+                <button
+                  type="button"
+                  className=" button d-grid  "
+                  onClick={() => finishBuy()}
+                >
                   Finish
                 </button>
               </div>
