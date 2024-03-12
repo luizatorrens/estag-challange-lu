@@ -26,7 +26,7 @@ export default function Categories() {
   const deleteCategory = async (id) => {
     try {
       await fetch(`http://localhost/routes/categories.php?id=${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       await getCategories();
     } catch (error) {
@@ -36,24 +36,25 @@ export default function Categories() {
 
   const addCategory = (e) => {
     e.preventDefault();
-    let data = new FormData()
-    data.append("name", name)
-    data.append("tax", tax)
+    let data = new FormData();
+    data.append("name", name);
+    data.append("tax", tax);
     fetch("http://localhost/routes/categories.php", {
       method: "POST",
-      body: data
-    }); window.location.reload()
+      body: data,
+    });
+    window.location.reload();
   };
 
   return (
     <>
       <Header />
-      <div className="container m-5">
-        <h2 className="text-center">Add Categories</h2>
-        <div className="container row d-flex justify-content-center">
-          <div className="col-6">
+      <h2 className="text-center mt-5">Add Categories</h2>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-6">
             <form className="m-5" id="categorytax" onSubmit={addCategory}>
-            <label className="label mt-2">Name</label>
+              <label className="label mt-2">Name</label>
               <input
                 required
                 className="input w-100 mb-2"
@@ -75,13 +76,12 @@ export default function Categories() {
               ></input>
 
               <button className="button mb-2 mt-2" type="submit">
-                {" "}
                 Save
               </button>
             </form>
           </div>
 
-          <div className="col-6">
+          <div className="col-lg-6">
             <Table hover className="table m-5 ">
               <thead>
                 <tr>

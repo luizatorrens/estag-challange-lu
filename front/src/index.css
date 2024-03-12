@@ -1,6 +1,6 @@
-body { min-height: 100vh; }
 
-.input, select {
+.input,
+select {
   border: 2px solid transparent;
   width: 15em;
   height: 2.5em;
@@ -10,7 +10,7 @@ body { min-height: 100vh; }
   background-color: #F3F3F3;
   border-radius: 10px;
   transition: all 0.5s;
-  
+
 }
 
 .input:hover,
@@ -30,31 +30,31 @@ body { min-height: 100vh; }
   color: #ffffff;
   box-shadow: 0 0.4rem #dfd9d9;
   cursor: pointer;
- }
- 
- .button:active {
+}
+
+.button:active {
   color: white;
   box-shadow: 0 0.2rem #dfd9d9;
   transform: translateY(0.2rem);
- }
- 
- .button:hover:not(:disabled) {
+}
+
+.button:hover:not(:disabled) {
   background: #6d65fe;
   color: white;
   text-shadow: 0 0.1rem #bcb4b4;
- }
- 
- .button:disabled {
+}
+
+.button:disabled {
   cursor: auto;
   color: rgb(216, 34, 34);
- }
-
- 
+}
 
 
- .buttonDel {
+
+
+.buttonDel {
   width: 40px;
-  height:40px;
+  height: 40px;
   border-radius: 50%;
   background-color: rgb(20, 20, 20);
   border: none;
@@ -107,38 +107,41 @@ body { min-height: 100vh; }
   transform: translateY(30px);
   transition-duration: .3s;
 }
- 
 
 
 
-body,html {
+
+body,
+html {
   margin: 0;
   font: bold 14px/1.4 'Open Sans', arial, sans-serif;
   background: #ffffff;
 }
-ul { 
-  padding: 0; 
-  list-style: none; 
-  display: table;
-  width: 600px;
+
+ul {
+  padding: 0;
+  list-style: none;
   text-align: center;
 }
-li { 
-  display: table-cell; 
-  position: relative; 
+
+li {
+  display: table-cell;
+  position: relative;
   padding: 15px 0;
 }
+
 .nav-link {
   color: #000000;
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 0.15em;
-  
+
   display: inline-block;
   padding: 15px 20px;
   position: relative;
 }
-.nav-link:after {    
+
+.nav-link:after {
   background: none repeat scroll 0 0 transparent;
   bottom: 0;
   content: "";
@@ -150,14 +153,10 @@ li {
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
-.nav-link:hover:after { 
-  width: 100%; 
-  left: 0; 
-}
-@media screen and (max-height: 300px) {
-	ul {
-		margin-top: 40px;
-	}
+
+.nav-link:hover:after {
+  width: 100%;
+  left: 0;
 }
 
 
@@ -167,20 +166,20 @@ li {
   font-size: .9rem;
   font-weight: bold;
   color: #05060f99;
-  transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
+  transition: color .3s cubic-bezier(.25, .01, .25, 1) 0s;
 }
 
 
-/* * {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-#linha-vertical {
+/* #linha-vertical {
   height: 500px;
   border-right: 1px solid rgb(124, 124, 124);
-}
+} */
 
 /* 
 :root {
@@ -251,4 +250,4 @@ li {
       background-color: #f9f9f9;
     }
   }
-   */ 
+   */

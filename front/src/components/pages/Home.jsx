@@ -169,11 +169,11 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="m-5">
-        <h2 className="text-center">Add to cart</h2>
-        <div className="container row">
-          <div className="col-6">
-            <form onSubmit={saveBuy} className="mt-5 ">
+        <h2 className="text-center mt-5">Add to cart</h2>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-6">
+            <form onSubmit={saveBuy} className="m-5 ">
               <select
                 id="selectProducts"
                 onChange={changeProduct}

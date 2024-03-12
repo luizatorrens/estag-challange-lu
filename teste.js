@@ -5,108 +5,112 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
  
-export default function History() {
-  const [show, setShow] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null);
-  const handleClose = () => setShow(false);
-  const handleShow = (order) => {
-    setSelectedOrder(order);
-    setShow(true);
-  };
+export default function Categories() {
+  const [categories, setCategories] = useState([]);
+  const [name, setName] = useState("");
+  const [tax, setTax] = useState("");
  
-  const [orders, setOrders] = useState([]);
-  const [ordersItems, setOrdersItems] = useState([]);
- 
-  const getOrders = async () => {
+  const getCategories = async () => {
     try {
-const response = await axios.get("http://localhost/routes/orders.php");
-      setOrders(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
- 
-  const getOrdersItems = async () => {
-    try {
-const response = await axios.get("http://localhost/routes/orderItem.php");
-      setOrdersItems(response.data);
+const response = await axios.get("http://localhost/routes/categories.php");
+      setCategories(response.data);
     } catch (error) {
       console.error(error);
     }
   };
  
   useEffect(() => {
-    getOrders();
-    getOrdersItems();
+    getCategories();
   }, []);
+ 
+  const deleteCategory = async (id) => {
+    try {
+await axios.delete(`http://localhost/routes/categories.php?id=${id}`);
+      getCategories();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+ 
+  const addCategory = async (e) => {
+    e.preventDefault();
+    try {
+await axios.post("http://localhost/routes/categories.php", {
+        name: name,
+        tax: tax
+      });
+      getCategories();
+    } catch (error) {
+      console.error(error);
+    }
+  };
  
   return (
     <>
       <Header />
-      <div className="m-5">
-        <Table hover className="table col-12 m-5">
-          <thead>
-            <tr>
-              <th scope="col">Code</th>
-              <th scope="col">Total Price</th>
-              <th scope="col">Tax</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order.code}>
-                <td>{order.code}</td>
-                <td>{order.total}</td>
-{order.tax}</td>
-                <td>
-                  <Button
-                    type="button"
-                    className="button w-50 d-grid"
-                    variant="primary"
-                    onClick={() => handleShow(order)}
-                  >
-                    Details
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
- 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Details</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="m-3">
-            <Table striped hover className="table">
+      <div className="container-fluid mt-5">
+        <div className="row">
+          <div className="col-lg-6">
+            <h2 className="text-center">Add Categories</h2>
+            <form onSubmit={addCategory}>
+              <div className="mb-3">
+                <label className="form-label">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Tax</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Tax"
+                  value={tax}
+                  onChange={(e) => setTax(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary mb-3">
+                Save
+              </button>
+            </form>
+          </div>
+          <div className="col-lg-6">
+            <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th scope="col">Code</th>
-                  <th scope="col">Product Code</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Tax</th>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Tax</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {ordersItems
-                  .filter((item) => item.order_code === selectedOrder.code)
-                  .map((orderItem) => (
-                    <tr key={orderItem.code}>
-                      <td>{orderItem.code}</td>
-                      <td>{orderItem.product_code}</td>
-                      <td>{orderItem.amount}</td>
-                      <td>{orderItem.price}</td>
-{orderItem.tax}</td>
-                    </tr>
-                  ))}
+                {categories.map((category) => (
+                  <tr key={category.code}>
+                    <td>{category.code}</td>
+{category.name}</td>
+{category.tax}</td>
+                    <td>
+                      <Button
+                        variant="danger"
+                        onClick={() => deleteCategory(category.code)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </div>
-        </Modal.Body>
-      </Modal>
+        </div>
+      </div>
     </>
   );
 }

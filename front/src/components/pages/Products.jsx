@@ -22,10 +22,10 @@ export default function Products() {
   };
 
   const deleteProduct = async (code) => {
-        await fetch(`http://localhost/routes/products.php?code=${code}`, {
-        method: 'DELETE',
-      }),
-    await getProducts()
+    await fetch(`http://localhost/routes/products.php?code=${code}`, {
+      method: "DELETE",
+    }),
+      await getProducts();
   };
 
   const addProduct = (e) => {
@@ -39,7 +39,7 @@ export default function Products() {
       method: "POST",
       body: data,
     }).then(getProducts());
-    window.location.reload()
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -52,10 +52,10 @@ export default function Products() {
   return (
     <>
       <Header />
-      <div className="m-5">
-        <h2 className="text-center">Add Products</h2>
-        <div className="container row ">
-          <div className="col-6">
+      <h2 className="text-center mt-5">Add Products</h2>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-lg-6">
             <form className="m-5" onSubmit={addProduct}>
               <select
                 className="select w-100 mb-2 mt-2"
@@ -97,16 +97,13 @@ export default function Products() {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               ></input>
-              <button
-                type="submit"
-                className="button mb-2 mt-2"
-              >
+              <button type="submit" className="button mb-2 mt-2">
                 Save
               </button>
             </form>
           </div>
 
-          <div className="col-6">
+          <div className="col-lg-6">
             <Table hover className="table m-5">
               <thead>
                 <tr>
