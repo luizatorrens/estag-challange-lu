@@ -4,7 +4,6 @@ import Home from "./components/pages/Home.jsx";
 import Categories from "./components/pages/Categories.jsx";
 import Products from "./components/pages/Products.jsx";
 import History from "./components/pages/History.jsx";
-import Details from "./components/pages/Details.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -26,10 +25,6 @@ const router = createBrowserRouter([
   {
     path: "/history",
     element: <History />,
-  },
-  {
-    path: "/details",
-    element: <Details />,
   },
 ]);
 

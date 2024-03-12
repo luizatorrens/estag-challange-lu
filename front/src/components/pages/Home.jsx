@@ -1,26 +1,18 @@
 import Header from "../layout/Navbar.jsx";
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
-// import axios from "axios";
 
 export default function Home() {
   const [values, setValues] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [amount, setAmount] = useState([]);
-  const [productData, setProductData] = useState({
-      price: "",
-      tax: "",
-    });
   const [carrinhoTemp, setCarrinhoTemp] = useState([]);
+  const [productData, setProductData] = useState({
+    price: "",
+    tax: "",
+  });
   let sumTax = 0;
-  let sumPrice = 0;
-
-  useEffect(() => {
-    fetch("http://localhost/routes/products.php")
-      .then((data) => data.json())
-      .then((val) => setValues(val));
-    showInput();
-  }, [selectedProduct, amount]);
+  let sumTotal = 0;
 
   const changeProduct = (event) => {
     setSelectedProduct(event.target.value);
@@ -35,28 +27,30 @@ export default function Home() {
     const dbProduct = await response.json();
     const product = dbProduct.find((p) => String(p.code) === selectedProduct);
     if (product) {
-      const tax_value = product.tax_value;
+      const tax_value = (product.tax_value) / 100;
       const price = product.price;
-      const totalTax = (tax_value * price * amount) / 100;
+      const totalTax = (tax_value * amount) * 100;
       const totalPrice = price * amount;
       setProductData({
-        price: totalPrice.toFixed(2),
-        tax: totalTax.toFixed(2),
+        price: totalPrice,
+        tax: totalTax,
       });
     }
   };
 
-  function changeTax() {
+  function totalTax() {
     carrinhoTemp.forEach((item) => {
       sumTax += item.tax;
     });
   }
+  totalTax();
 
-  function changePrice() {
+  function totalTotal() {
     carrinhoTemp.forEach((item) => {
-      sumPrice += item.price;
+      sumTotal += item.total;
     });
   }
+  totalTotal();
 
   const saveBuy = async (e) => {
     e.preventDefault();
@@ -65,10 +59,10 @@ export default function Home() {
     const product = dbProduct.find((p) => String(p.code) === selectedProduct);
 
     const amount = parseFloat(document.getElementById("amount").value);
-    const tax_value = product.tax_value;
+    const tax_value = (product.tax_value) / 100;
     const price = product.price;
 
-    const totalTax = (tax_value * price * amount) / 100;
+    const totalTax = (tax_value *  amount) * 100;
     const totalPrice = price * amount;
     const total = totalTax + totalPrice;
 
@@ -117,12 +111,12 @@ export default function Home() {
   };
 
   const finishBuy = async () => {
-    let sumPrice = 0;
+    let sumTotal = 0;
     let sumTax = 0;
     if (carrinhoTemp.length > 0) {
       carrinhoTemp.forEach((product) => {
         sumTax += parseFloat(product.tax);
-        sumPrice += parseFloat(product.price);
+        sumTotal += parseFloat(product.price);
       });
       const response = confirm("Deseja finalizar sua compra?");
       if (response) {
@@ -133,7 +127,7 @@ export default function Home() {
               "Content-Type": "application/x-www-form-urlencoded",
             },
             body: new URLSearchParams({
-              total: sumPrice,
+              total: sumTotal,
               tax: sumTax,
             }),
           }).then(async () => {
@@ -164,8 +158,14 @@ export default function Home() {
       }
     }
   };
-  changeTax();
-  changePrice();
+
+  useEffect(() => {
+    fetch("http://localhost/routes/products.php")
+      .then((data) => data.json())
+      .then((val) => setValues(val));
+    showInput();
+  }, [selectedProduct, amount]);
+
   return (
     <>
       <Header />
@@ -187,8 +187,9 @@ export default function Home() {
                   </option>
                 ))}
               </select>
+              <label className="label mt-2">Amount</label>
               <input
-                className="input w-100 mt-2 mb-2"
+                className="input w-100  mb-2"
                 min="1"
                 placeholder="Amount"
                 type="number"
@@ -196,16 +197,18 @@ export default function Home() {
                 value={amount}
                 onChange={changeAmount}
               ></input>
+              <label className="label mt-2">Tax</label>
               <input
-                className="input w-100 mt-2 mb-2"
+                className="input w-100 mb-2"
                 placeholder="Tax"
                 readOnly
                 disabled
                 id="tax"
                 value={productData.tax}
               ></input>
+              <label className="label mt-2">Price</label>
               <input
-                className="input w-100 mt-2 mb-2"
+                className="input w-100 mb-2"
                 placeholder="Price"
                 readOnly
                 disabled
@@ -250,6 +253,7 @@ export default function Home() {
             </Table>
 
             <div className="col-2 position-absolute bottom-0 end-0 m-5">
+              <label className="label">Total Tax</label>
               <input
                 type="text"
                 name=""
@@ -260,10 +264,11 @@ export default function Home() {
                 disabled
                 readOnly
               />
+              <label className="label">Total</label>
               <input
                 type="text"
                 name=""
-                value={sumPrice}
+                value={sumTotal}
                 id="totalprice"
                 className="form-control mb-3"
                 placeholder="Total"

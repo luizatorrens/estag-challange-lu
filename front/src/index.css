@@ -160,6 +160,17 @@ li {
 	}
 }
 
+
+.label {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: .9rem;
+  font-weight: bold;
+  color: #05060f99;
+  transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
+}
+
+
 /* * {
   box-sizing: border-box;
   margin: 0;

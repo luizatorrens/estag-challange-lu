@@ -53,17 +53,19 @@ export default function Categories() {
         <div className="container row d-flex justify-content-center">
           <div className="col-6">
             <form className="m-5" id="categorytax" onSubmit={addCategory}>
+            <label className="label mt-2">Name</label>
               <input
                 required
-                className="input w-100 mb-2 mt-2"
+                className="input w-100 mb-2"
                 placeholder="Name"
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
+              <label className="label mt-2">Tax</label>
               <input
                 required
-                className="input w-100 mb-2 mt-2"
+                className="input w-100 mb-2"
                 min="1"
                 placeholder="Tax"
                 type="number"

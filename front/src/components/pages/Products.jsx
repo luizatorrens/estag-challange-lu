@@ -25,7 +25,7 @@ export default function Products() {
         await fetch(`http://localhost/routes/products.php?code=${code}`, {
         method: 'DELETE',
       }),
-    window.location.reload()
+    await getProducts()
   };
 
   const addProduct = (e) => {
@@ -72,22 +72,25 @@ export default function Products() {
                   </option>
                 ))}
               </select>
+              <label className="label mt-2">Product Name</label>
               <input
-                className="input w-100 mb-2 mt-2"
+                className="input w-100 mb-2 "
                 placeholder="Product Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
+              <label className="label mt-2">Amount</label>
               <input
-                className="input w-100 mb-2 mt-2"
+                className="input w-100 mb-2 "
                 min="1"
                 placeholder="Amount"
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
               ></input>
+              <label className="label mt-2">Price</label>
               <input
-                className="input w-100 mb-2 mt-2"
+                className="input w-100 mb-2 "
                 min="1"
                 placeholder="Price"
                 type="number"
