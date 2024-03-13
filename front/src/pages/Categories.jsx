@@ -1,6 +1,6 @@
 import Header from "../components/all/Navbar.jsx";
-import FormCategory from "../components/categories/formCategory.jsx";
-import TableCategory from "../components/categories/tableCategory.jsx";
+import FormCategory from "../components/categories/FormCategoryy.jsx";
+import TableCategory from "../components/categories/TableCategoryy.jsx";
 
 export default function Categories() {
   return (

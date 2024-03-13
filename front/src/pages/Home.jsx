@@ -1,6 +1,9 @@
 import Header from "../components/all/Navbar.jsx";
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
+import Button from "../components/all/Button.jsx";
+import Input from "../components/all/Input.jsx";
+import ButtonDel from "../components/all/ButtonDel.jsx";
 
 export default function Home() {
   const [values, setValues] = useState([]);
@@ -187,7 +190,7 @@ export default function Home() {
                 ))}
               </select>
               <label className="label mt-2">Amount</label>
-              <input
+              <Input
                 className="input w-100  mb-2"
                 min="1"
                 placeholder="Amount"
@@ -195,28 +198,24 @@ export default function Home() {
                 id="amount"
                 value={amount}
                 onChange={changeAmount}
-              ></input>
+              />
               <label className="label mt-2">Tax</label>
-              <input
+              <Input
                 className="input w-100 mb-2"
                 placeholder="Tax"
-                readOnly
                 disabled
                 id="tax"
                 value={productData.tax}
-              ></input>
+              />
               <label className="label mt-2">Price</label>
-              <input
+              <Input
                 className="input w-100 mb-2"
                 placeholder="Price"
-                readOnly
                 disabled
                 id="price"
                 value={productData.price}
-              ></input>
-              <button type="submit" className="button mt-2 mb-2">
-                Add to cart
-              </button>
+              />
+              <Button type="submit" texto="Add Product"/>
             </form>
           </div>
 
@@ -240,11 +239,8 @@ export default function Home() {
                     <td>{item.tax}</td>
                     <td>{item.total}</td>
                     <td>
-                      <button className="buttonDel" onClick={() => removeRow()}>
-                        <svg viewBox="0 0 448 512" className="svgIcon">
-                          <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
-                        </svg>
-                      </button>
+                      <ButtonDel onClick={() => removeRow()}/>
+              
                     </td>
                   </tr>
                 ))}
@@ -253,7 +249,7 @@ export default function Home() {
 
             <div className="col-2 position-absolute bottom-0 end-0 m-5">
               <label className="label">Total Tax</label>
-              <input
+              <Input
                 type="text"
                 name=""
                 value={sumTax}
@@ -264,7 +260,7 @@ export default function Home() {
                 readOnly
               />
               <label className="label">Total</label>
-              <input
+              <Input
                 type="text"
                 name=""
                 value={sumTotal}
@@ -274,7 +270,7 @@ export default function Home() {
                 disabled
                 readOnly
               />
-              <div className="d-flex ">
+              <div className="d-flex mt-3 ">
                 <button
                   type="button"
                   className=" button d-grid me-1"
