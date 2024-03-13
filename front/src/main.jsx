@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Home from "./components/pages/Home.jsx";
-import Categories from "./components/pages/Categories.jsx";
-import Products from "./components/pages/Products.jsx";
-import History from "./components/pages/History.jsx";
+import Home from "./pages/Home.jsx";
+import Categories from "./pages/Categories.jsx";
+import Products from "./pages/Products.jsx";
+import History from "./pages/History.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 

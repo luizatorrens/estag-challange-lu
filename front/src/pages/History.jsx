@@ -1,4 +1,4 @@
-import Header from "../layout/Navbar.jsx";
+import Header from "../components/all/Navbar.jsx";
 // import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import { useState, useEffect } from "react";
@@ -14,7 +14,6 @@ export default function History() {
     setSelectedOrder(order);
     setShow(true);
   };
- 
 
   const [orders, setOrders] = useState([]);
   const [ordersItems, setOrdersItems] = useState([]);
@@ -93,17 +92,20 @@ export default function History() {
                     </tr>
                   </thead>
                   <tbody>
-                  {selectedOrder && ordersItems
-                  .filter((item) => item.order_code === selectedOrder.code)
-                  .map((orderItem) => (
-                    <tr key={orderItem.code}>
-                      <td>{orderItem.code}</td>
-                      <td>{orderItem.product_code}</td>
-                      <td>{orderItem.amount}</td>
-                      <td>{orderItem.price}</td>
-                      <td>{orderItem.tax}</td>
-                    </tr>
-                  ))}
+                    {selectedOrder &&
+                      ordersItems
+                        .filter(
+                          (item) => item.order_code === selectedOrder.code
+                        )
+                        .map((orderItem) => (
+                          <tr key={orderItem.code}>
+                            <td>{orderItem.code}</td>
+                            <td>{orderItem.product_code}</td>
+                            <td>{orderItem.amount}</td>
+                            <td>{orderItem.price}</td>
+                            <td>{orderItem.tax}</td>
+                          </tr>
+                        ))}
                   </tbody>
                 </Table>
               </div>

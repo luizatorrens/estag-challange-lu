@@ -1,4 +1,4 @@
-import Header from "../layout/Navbar.jsx";
+import Header from "../components/all/Navbar.jsx";
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
 import axios from "axios";

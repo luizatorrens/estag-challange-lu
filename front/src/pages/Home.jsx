@@ -1,4 +1,4 @@
-import Header from "../layout/Navbar.jsx";
+import Header from "../components/all/Navbar.jsx";
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
 
@@ -27,9 +27,9 @@ export default function Home() {
     const dbProduct = await response.json();
     const product = dbProduct.find((p) => String(p.code) === selectedProduct);
     if (product) {
-      const tax_value = (product.tax_value) / 100;
+      const tax_value = product.tax_value / 100;
       const price = product.price;
-      const totalTax = (tax_value * amount) * 100;
+      const totalTax = tax_value * amount * 100;
       const totalPrice = price * amount;
       setProductData({
         price: totalPrice,
@@ -58,11 +58,10 @@ export default function Home() {
     const dbProduct = await response.json();
     const product = dbProduct.find((p) => String(p.code) === selectedProduct);
 
-    const amount = parseFloat(document.getElementById("amount").value);
-    const tax_value = (product.tax_value) / 100;
+    const tax_value = product.tax_value / 100;
     const price = product.price;
 
-    const totalTax = (tax_value *  amount) * 100;
+    const totalTax = tax_value * amount * 100;
     const totalPrice = price * amount;
     const total = totalTax + totalPrice;
 
@@ -169,7 +168,7 @@ export default function Home() {
   return (
     <>
       <Header />
-        <h2 className="text-center mt-5">Add to cart</h2>
+      <h2 className="text-center mt-5">Add to cart</h2>
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-6">
