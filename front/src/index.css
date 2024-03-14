@@ -1,4 +1,3 @@
-
 .button {
   background-color: #7f78fd;
   border: none;
@@ -38,13 +37,15 @@
 }
 
 
-
-
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: #afa9ff;
+}
 

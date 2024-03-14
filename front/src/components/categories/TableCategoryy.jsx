@@ -35,7 +35,7 @@ export default function TableCategory() {
   return (
     <>
       <div className="col-lg-6">
-        <Table hover className="table m-5 ">
+        <Table hover className="table-hover m-5 ">
           <thead>
             <tr>
               <th>Code</th>

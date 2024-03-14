@@ -42,7 +42,7 @@ export default function HistoryTable() {
   }, []);
   return (
     <>
-      <Table hover className="table col-12 m-5">
+      <Table hover  className="table col-12 m-5">
         <thead>
           <tr>
             <th scope="col">Code</th>
@@ -76,7 +76,7 @@ export default function HistoryTable() {
           </Modal.Header>
           <Modal.Body>
             <div className="m-3">
-              <Table striped hover className="table">
+              <Table  hover className="table-hover">
                 <thead>
                   <tr>
                     <th scope="col">Code</th>
