@@ -1,4 +1,4 @@
-import Header from "../components/all/Navbar.jsx";
+import Header from "../components/Navbar/Navbar.jsx";
 import HistoryTable from "../components/history/historyTable.jsx";
 
 export default function History() {

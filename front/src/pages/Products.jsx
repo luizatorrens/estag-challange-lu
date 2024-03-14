@@ -1,4 +1,4 @@
-import Header from "../components/all/Navbar.jsx";
+import Header from "../components/Navbar/Navbar.jsx";
 import FormProduct from "../components/products/formProduct.jsx";
 import TableProduct from "../components/products/tableProduct.jsx";
 

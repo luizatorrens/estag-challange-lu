@@ -1,4 +1,4 @@
-import Header from "../components/all/Navbar.jsx";
+import Header from "../components/Navbar/Navbar.jsx";
 import FormCategory from "../components/categories/FormCategoryy.jsx";
 import TableCategory from "../components/categories/TableCategoryy.jsx";
 

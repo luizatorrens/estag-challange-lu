@@ -1,9 +1,9 @@
-import Header from "../components/all/Navbar.jsx";
+import Header from "../components/Navbar/Navbar.jsx";
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
-import Button from "../components/all/Button.jsx";
-import Input from "../components/all/Input.jsx";
-import ButtonDel from "../components/all/ButtonDel.jsx";
+import Input from "../components/Inputs/Input.jsx";
+import ButtonDel from "../components/ButtonDel/ButtonDel.jsx";
+import Button from "../components/Button/Button.jsx";
 
 export default function Home() {
   const [values, setValues] = useState([]);
@@ -270,21 +270,19 @@ export default function Home() {
                 disabled
                 readOnly
               />
-              <div className="d-flex mt-3 ">
+              <div className="d-flex  mt-3">
                 <button
                   type="button"
                   className=" button d-grid me-1"
                   onClick={() => cancelBuy()}
-                >
-                  Cancel
-                </button>
+                  texto="Cancel"
+                > Cancel </button>
                 <button
                   type="button"
                   className=" button d-grid  "
                   onClick={() => finishBuy()}
-                >
-                  Finish
-                </button>
+                  texto="Finish"
+                > Finish</button>
               </div>
             </div>
           </div>

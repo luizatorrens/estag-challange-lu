@@ -1,0 +1,49 @@
+body,
+html {
+  margin: 0;
+  font: bold 14px/1.4 'Open Sans', arial, sans-serif;
+  background: #ffffff;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+li {
+  display: table-cell;
+  position: relative;
+  padding: 15px 0;
+}
+
+.nav {
+  color: #000000;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+}
+
+.nav:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #6d65fe;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.nav:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+

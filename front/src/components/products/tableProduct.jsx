@@ -1,7 +1,7 @@
 import Table from "react-bootstrap/Table";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ButtonDel from "../all/ButtonDel";
+import ButtonDel from "../ButtonDel/ButtonDel";
 
 export default function TableProduct() {
   const [products, setProducts] = useState([]);
@@ -52,7 +52,7 @@ export default function TableProduct() {
                   <ButtonDel
                     onClick={() => deleteProduct(product.code)}
                   />
-                   
+
                 </td>
               </tr>
             ))}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import ButtonDel from "../all/ButtonDel";
+import ButtonDel from "../ButtonDel/ButtonDel";
 
 export default function TableCategory() {
   const [categories, setCategories] = useState([]);
@@ -38,9 +38,9 @@ export default function TableCategory() {
         <Table hover className="table m-5 ">
           <thead>
             <tr>
-              <th scope="col">Code</th>
-              <th scope="col">Name</th>
-              <th scope="col">Tax</th>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Tax</th>
             </tr>
           </thead>
           <tbody>

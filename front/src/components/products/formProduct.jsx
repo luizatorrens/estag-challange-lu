@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Input from "../all/Input";
-import Button from "../all/Button";
+import Input from "../Inputs/Input";
+import Button from "../Button/Button";
 
 export default function FormProduct() {
   const [setProducts] = useState([]);
@@ -85,7 +85,7 @@ export default function FormProduct() {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
-          <Button type="submit" texto="Add Product"/>
+          <Button type="submit" texto="Add Product" />
         </form>
       </div>
     </>

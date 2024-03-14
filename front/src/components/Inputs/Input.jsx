@@ -1,6 +1,6 @@
 import styles from "./Input.module.css"
 
-function Input({ type, text, name, placeholder, onChange, value }) {
+function Input({ type, text, name, placeholder, onChange, value, min }) {
   return (
     <>
       <input
@@ -11,6 +11,7 @@ function Input({ type, text, name, placeholder, onChange, value }) {
         placeholder={placeholder}
         onChange={onChange}
         value={value}
+        min={min}
       />
     </>
   );
