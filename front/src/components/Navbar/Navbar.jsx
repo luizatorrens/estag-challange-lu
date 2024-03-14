@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <ul>
       <li>
-        <Link className={styles.nav} to="/">
+        <Link className={styles.nav} to="/home">
           Suite Store
         </Link>
       </li>
@@ -24,6 +24,13 @@ export default function Header() {
           History
         </Link>
       </li>
+      <li>
+        <Link className={styles.nav} to="/">
+          Logout 
+        </Link>
+      </li>
+
+  
     </ul>
   );
 }

@@ -4,6 +4,7 @@ import Home from "./pages/Home.jsx";
 import Categories from "./pages/Categories.jsx";
 import Products from "./pages/Products.jsx";
 import History from "./pages/History.jsx";
+import Login from "./pages/Login.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -12,6 +13,10 @@ import "./index.css";
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/home",
     element: <Home />,
   },
   {
