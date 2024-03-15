@@ -85,7 +85,7 @@ export default function FormProduct() {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
-          <Button type="submit" texto="Add Product" />
+          <Button type="submit" texto="Add Product"  />
         </form>
       </div>
     </>

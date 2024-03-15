@@ -5,7 +5,6 @@ import Button from "../Button/Button";
 export default function FormCategory() {
   const [name, setName] = useState("");
   const [tax, setTax] = useState("");
-
   const addCategory = (e) => {
     e.preventDefault();
     let data = new FormData();

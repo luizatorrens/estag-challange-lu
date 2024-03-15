@@ -1,45 +1,37 @@
-import styles from "./FormLogin.module.css"
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import styles from "./FormRegister.module.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function FormLogin() {
+export default function FormRegister() {
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
+    const register = 1
     const navigate = useNavigate();
-    const users = JSON.parse(localStorage.getItem("user"));
+    
 
-
-    const Login = async (e) => {
+    const addUser = (e) => {
         e.preventDefault();
         let data = new FormData();
         data.append("username", user);
         data.append("pass", pass);
-        const res = fetch("http://localhost/routes/users.php", {
+        data.append("register", register);
+        fetch("http://localhost/routes/users.php", {
             method: "POST",
             body: data,
         }).then(async (res) => {
-            let user = await res.json()
-            localStorage.setItem("user", JSON.stringify(user))
-            const users = JSON.parse(localStorage.getItem("user")) || {}
-            if (user.error) {
-                alert(res.error)
-                return
-            }
-            navigate('/home')
-            return
-        });
+            console.log(await res.text())
+        }).catch((err) => {
+            console.log(err)
+        })
+        navigate('/')
     };
 
-
-
-    // navigate('/home');
 
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.heading}>Login</div>
-                <form className={styles.form} onSubmit={(e) => { Login(e) }} action="">
-
+                <div className={styles.heading}>Register</div>
+                <form className={styles.form} action="">
                     <input
                         placeholder="User"
                         id="usuario"
@@ -60,12 +52,18 @@ export default function FormLogin() {
                         className={styles.input}
                         required
                     />
-                    <input value="Login" type="submit" className={styles.login} />
+                    {/* <input
+                        placeholder="Confirm password"
+                        id="senha"
+                        name="senha"
+                        value={pass}
+                        onChange={(e) => handleInputChange(e, "pass")}
+                        type="password"
+                        className={styles.input}
+                        required
+                    /> */}
+                    <input value="Register" type="submit" className={styles.login} onClick={addUser} />
 
-                    <p className={styles.signup}>
-                        No account?
-                        <Link to="/register">Sign up</Link>
-                    </p>
                 </form>
 
             </div>

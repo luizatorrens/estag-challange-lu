@@ -85,15 +85,3 @@
     color: green;
   }
 
-  .signup {
-    margin-top: 50px;
-    color: #6B7280;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    text-align: center;
-  }
-  
-  .signup a {
-    text-decoration: underline;
-    color: #7f78fd;
-  }

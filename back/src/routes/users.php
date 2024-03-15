@@ -6,12 +6,23 @@ include "../services/usersServices.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    if(!empty($_POST['register'])) {
     $username = filter_var($_POST["username"]);
-    $pass = filter_var($_POST["pass"]);
+    $pass = $_POST["pass"];
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
 
     $result = createUser($username, $pass);
-    echo $result;
-}
+    return $result;   
+    } else {            
+            $username = filter_var($_POST["username"]);
+            $pass = ($_POST["pass"]);
+    
+            $result = Login($username, $pass);
+            echo json_encode($result);
+            return $result;
+        }
+    }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') { 
     $data = readUsers();

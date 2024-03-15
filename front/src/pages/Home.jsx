@@ -220,7 +220,7 @@ export default function Home() {
           </div>
 
           <div className="col-6">
-            <Table hover className="table-hover m-5">
+            <Table hover className="table m-5">
               <thead>
                 <tr>
                   <th scope="col">Product</th>

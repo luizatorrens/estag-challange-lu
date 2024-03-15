@@ -55,7 +55,7 @@ export default function TableCategory() {
                   />
                 </td>
               </tr>
-            ))}.
+            ))}
           </tbody>
         </Table>
       </div>
