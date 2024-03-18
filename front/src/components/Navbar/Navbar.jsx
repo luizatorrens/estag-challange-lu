@@ -9,7 +9,7 @@ export default function Header() {
       "Deseja sair de Suite Store?"
     );
     if (response);
-    await localStorage.removeItem("user");
+    await localStorage.clear("user");
     navigate('/')
   };
 

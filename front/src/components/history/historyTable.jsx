@@ -6,15 +6,17 @@ import Modal from "react-bootstrap/Modal";
 
 export default function HistoryTable() {
   const [show, setShow] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [details, setDetails] = useState([]);
   const handleClose = () => setShow(false);
-  const handleShow = (order) => {
-    setSelectedOrder(order);
-    setShow(true);
-  };
-
   const [orders, setOrders] = useState([]);
   const [ordersItems, setOrdersItems] = useState([]);
+
+
+  const showDetails = (id) => {
+    setShow(true);
+    let data = ordersItems.filter((order) => order.order_code == id);
+    setDetails(data);
+  };
 
   const getOrders = async () => {
     try {
@@ -61,7 +63,7 @@ export default function HistoryTable() {
                   type="button"
                   className="button w-50 d-grid"
                   variant="primary"
-                  onClick={() => handleShow(order)}
+                  onClick={() => showDetails(order.code)}
                 >
                   Details
                 </Button>
@@ -87,18 +89,21 @@ export default function HistoryTable() {
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedOrder &&
-                    ordersItems
-                      .filter((item) => item.order_code === selectedOrder.code)
-                      .map((orderItem) => (
+                  {details?.map((orderItem) => (
+
                         <tr key={orderItem.code}>
+                  
                           <td>{orderItem.code}</td>
                           <td>{orderItem.product_code}</td>
                           <td>{orderItem.amount}</td>
                           <td>{orderItem.price}</td>
                           <td>{orderItem.tax}</td>
                         </tr>
-                      ))}
+          
+
+
+                  ))}
+                      
                 </tbody>
               </Table>
             </div>

@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST["price"];
     $tax = $_POST["tax"];
 
-    $result = createOrderItem($order, $product, $amount, $price, $tax);
+    $result = createOrderItem( $order, $product, $amount, $price, $tax);
     echo $result;
 }
 
